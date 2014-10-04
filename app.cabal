@@ -22,6 +22,7 @@ executable app
                      , http-types
                      , resourcet
                      , scotty
+                     , clay
                      , text
                      , bytestring
                      , blaze-html
@@ -36,6 +37,8 @@ executable app
                      , wai-extra
                      , time
                      , HDBC
+                     , blaze-html
+                     , blaze-markup
 
 
   -- hs-source-dirs:
