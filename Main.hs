@@ -9,7 +9,6 @@ import Web.Scotty (middleware, scotty)
 
 main :: IO()
 main = do
-
   scotty 3000 $ do
-    middleware $ staticPolicy (noDots >-> addBase "static/images") -- for favicon.ico
+    middleware $ staticPolicy (noDots >-> addBase "Static/images") -- for favicon.ico
     home >> login

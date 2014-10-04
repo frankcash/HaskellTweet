@@ -4,10 +4,11 @@ Will be a twitter clone in Haskell using the [Scotty framework](https://github.c
 
 ## Running
 ```
-$ cd /path/to/my/haskell/library
+$ cd /path/to/program
 $ cabal sandbox init                   # Initialise the sandbox
 $ cabal install --only-dependencies    # Install dependencies into the sandbox
 $ cabal build                          # Build your package inside the sandbox
+$ cabal run app.cabal
 ```
 
 
