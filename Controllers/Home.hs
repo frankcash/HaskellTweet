@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Controllers.home
+module Controllers.Home
   (home
   , login
   ) where
