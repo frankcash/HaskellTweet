@@ -3,6 +3,7 @@
 module Controllers.Home
   (home
   , login
+  , foo
   ) where
 
 import Views.Home (homeView)
@@ -13,3 +14,6 @@ home = get "/" homeView
 
 login :: ScottyM()
 login = get "/login" $ html "login"
+
+foo :: ScottyM()
+foo = get "/foo" $ html "Hello, this is foo!"
