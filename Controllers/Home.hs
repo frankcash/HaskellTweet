@@ -8,6 +8,7 @@ module Controllers.Home
   ) where
 
 import Views.Home (homeView)
+import Views.Foor (foorView)
 import Web.Scotty (ScottyM, get, html)
 
 home :: ScottyM ()
@@ -23,4 +24,4 @@ foo = get "/foo" $ html "Hello, this is foo!"
 -- createUser =
 
 foor :: ScottyM()
-foor = get "/404" $ html "Sorry, this page is not present!"
+foor = get "/404"  foorView
