@@ -10,7 +10,7 @@ $ cabal install --only-dependencies    # Install dependencies into the sandbox
 $ cabal build                          # Build your package inside the sandbox
 $ cabal run app.cabal
 ```
-
+If you have trouble installing HDBC-sqlite3 run the following: `apt-get install libsqlite3-dev sqliteman sqlite3`
 
 ## License
 Beer License
