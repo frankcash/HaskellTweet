@@ -10,7 +10,7 @@ maintainer:          cashc@acm.org
 category:            Web
 build-type:          Simple
 -- extra-source-files:
-cabal-version:       >=1.8
+cabal-version:       >=1.10
 
 executable app
   main-is:             Main.hs
