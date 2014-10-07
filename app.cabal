@@ -37,6 +37,7 @@ executable app
                      , wai-extra
                      , time
                      , HDBC
+                     , HDBC-sqlite3
                      , blaze-html
                      , blaze-markup
 
