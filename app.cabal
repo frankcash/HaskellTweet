@@ -41,6 +41,7 @@ executable app
                      , blaze-html
                      , blaze-markup
                      , monadIO
+                     , mtl
 
 
   -- hs-source-dirs:
