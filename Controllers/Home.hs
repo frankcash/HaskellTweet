@@ -4,12 +4,15 @@ module Controllers.Home
   (home
   , login
   , foo
+  , createUser
   , foor
   ) where
 
+import Web.Scotty
+import Data.Monoid (mconcat)
 import Views.Home (homeView)
 import Views.Foor (foorView)
-import Web.Scotty (ScottyM, get, html)
+
 
 home :: ScottyM ()
 home = get "/" homeView
@@ -22,6 +25,15 @@ foo = get "/foo" $ html "Hello, this is foo!"
 
 -- createUser :: ScottyM()
 -- createUser =
+
+
+
+createUser :: ScottyM()
+createUser = get "/create/user/:userId/:name" $ do
+  beam <- param "name"
+  html $ mconcat ["<p>/create/user/:userId/:name</p>"]
+
+
 
 foor :: ScottyM()
 foor = get "/404"  foorView
