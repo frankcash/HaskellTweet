@@ -40,6 +40,7 @@ executable app
                      , HDBC-sqlite3
                      , blaze-html
                      , blaze-markup
+                     , monadIO
 
 
   -- hs-source-dirs:
