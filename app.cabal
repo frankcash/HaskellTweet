@@ -42,6 +42,7 @@ executable app
                      , blaze-markup
                      , monadIO
                      , mtl
+                     , convertible==1.1.0.0
 
 
   -- hs-source-dirs:
