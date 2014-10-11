@@ -45,7 +45,7 @@ createUser = get "/create/user/:userId/:name" $ do
 foor :: ScottyM()
 foor = get "/404"  foorView
 
-createUserDB :: a1 -> a0 -> IO()
+-- createUserDB :: a1 -> a0 -> IO()
 createUserDB name userId = do
   conn <- connectSqlite3 databaseFilePath
   run conn "INSERT INTO users VALUES (? , ?)" [toSql $ userId, toSql $ name]
