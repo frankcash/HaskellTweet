@@ -1,7 +1,7 @@
 module Main where
 
 import Control.Applicative((<$>))
-import Controllers.Home (home, login, foo, createUser, getAllUsers, foor)
+import Controllers.Home (home, login, foo, createUser,  foor)
 import Controllers.CreateDb (initDB)
 import Network.Wai.Middleware.RequestLogger (logStdoutDev)
 import Network.Wai.Middleware.Static (addBase, noDots, staticPolicy, (>->))
@@ -13,4 +13,4 @@ main = do
   initDB --creates DB or connects
   scotty 3000 $ do
     middleware $ staticPolicy (noDots >-> addBase "Static/images") -- for favicon.ico
-    home >> login >> foo >> createUser >> getAllUsers >> foor
+    home >> login >> foo >> createUser >>  foor

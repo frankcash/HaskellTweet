@@ -14,6 +14,7 @@ import Web.Scotty (ScottyM, ActionM, get, html, param, text)
 import Data.Monoid (mconcat)
 import Views.Home (homeView)
 import Views.Foor (foorView)
+import Controllers.CreateDb (createUserDB)
 import Database.HDBC
 import Database.HDBC.Sqlite3
 import Control.Monad.Trans ( MonadIO(liftIO) )
@@ -48,13 +49,6 @@ getAllUsers = get "/users/all" $ do
 
 foor :: ScottyM()
 foor = get "/404"  foorView
-
--- createUserDB :: a1 -> a0 -> IO()
-createUserDB name userId = do
-  conn <- connectSqlite3 databaseFilePath
-  run conn "INSERT INTO users VALUES (? , ?)" [toSql $ userId, toSql $ name]
-  commit conn
-  disconnect conn
 
 
 getUsersDB = do
