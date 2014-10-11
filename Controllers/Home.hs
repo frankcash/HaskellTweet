@@ -5,11 +5,12 @@ module Controllers.Home
   , login
   , foo
   , createUser
+  , getAllUsers
   , foor
   ) where
 
 import Control.Monad
-import Web.Scotty (ScottyM, ActionM, get, html, param)
+import Web.Scotty (ScottyM, ActionM, get, html, param, text)
 import Data.Monoid (mconcat)
 import Views.Home (homeView)
 import Views.Foor (foorView)
@@ -40,7 +41,10 @@ createUser = get "/create/user/:userId/:name" $ do
   liftIO $ createUserDB name userId -- monad transform
   html $ mconcat ["<p>/create/user/" , userId , "/" , name ,"</p>"]
 
-
+getAllUsers = get "/users/all" $ do
+  usersL <- liftIO $ getUsersDB
+  text <- liftIO $ usersL
+  "foo"
 
 foor :: ScottyM()
 foor = get "/404"  foorView
@@ -52,6 +56,13 @@ createUserDB name userId = do
   commit conn
   disconnect conn
 
+
+getUsersDB = do
+  conn <- connectSqlite3 databaseFilePath
+  usersF <- run conn "SELECT name FROM users VALUES (? )" []
+  commit conn
+  disconnect conn
+  return(usersF)
 
 
 databaseFilePath = "data/hacktober.db"
