@@ -28,12 +28,19 @@ login :: ScottyM()
 login = get "/login" $ html "login"
 
 foo :: ScottyM()
-foo = get "/foo" $ html "Hello, this is foo!"
+foo = get "/foo" $ do
+  html "Hello, this is foo!"
 
 -- createUser :: ScottyM()
 -- createUser =
 -- createUser ::  Connection -> Redis a -> ActionM a -- correct, but not this use case
 -- createUser ::  ActionM a -> Connection -> IO() -- need to figure out
+
+
+getAllUsers :: ScottyM()
+getAllUsers = get "/users/all" $ do
+  html $ mconcat ["<p>/users/all</p><p>",  getUsersDB , "</p>"]
+
 
 createUser ::  ScottyM()
 createUser = get "/create/user/:userId/:name" $ do
@@ -42,21 +49,22 @@ createUser = get "/create/user/:userId/:name" $ do
   liftIO $ createUserDB name userId -- monad transform
   html $ mconcat ["<p>/create/user/" , userId , "/" , name ,"</p>"]
 
-getAllUsers = get "/users/all" $ do
-  usersL <- liftIO $ getUsersDB
-  text <- liftIO $ usersL
-  "foo"
 
 foor :: ScottyM()
 foor = get "/404"  foorView
 
 
 getUsersDB = do
+  -- conn <- connectSqlite3 databaseFilePath
+  -- usersF <- run conn "SELECT name FROM users VALUES" []
+  -- commit conn
+  -- disconnect conn
+  -- return(usersF)
   conn <- connectSqlite3 databaseFilePath
-  usersF <- run conn "SELECT name FROM users VALUES (? )" []
-  commit conn
+  stmt <- prepare conn "SELECT name FROM users VALUES"
+  results <- fetchAllRowsAL stmt
   disconnect conn
-  return(usersF)
+  return (results)
 
 
 databaseFilePath = "data/hacktober.db"
