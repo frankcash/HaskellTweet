@@ -5,6 +5,7 @@ module Controllers.Home
   , login
   , foo
   , createUser
+  , createPostS
   , getAllUsers
   , foor
   ) where
@@ -14,7 +15,7 @@ import Web.Scotty (ScottyM, ActionM, get, html, param, text)
 import Data.Monoid (mconcat)
 import Views.Home (homeView)
 import Views.Foor (foorView)
-import Controllers.CreateDb (createUserDB)
+import Controllers.CreateDb (createUserDB, createPost)
 import Database.HDBC
 import Database.HDBC.Sqlite3
 import Control.Monad.Trans ( MonadIO(liftIO) )
@@ -39,7 +40,7 @@ foo = get "/foo" $ do
 
 getAllUsers :: ScottyM()
 getAllUsers = get "/users/all" $ do
-  html $ mconcat ["<p>/users/all</p><p>",  getUsersDB , "</p>"]
+  html "hi"
 
 
 createUser ::  ScottyM()
@@ -47,19 +48,22 @@ createUser = get "/create/user/:userId/:name" $ do
   name <- param "name"
   userId <- param "userId"
   liftIO $ createUserDB name userId -- monad transform
-  html $ mconcat ["<p>/create/user/" , userId , "/" , name ,"</p>"]
+  html $ mconcat ["<p>/create/user/" , userId , "/" , name , "</p>"]
 
+createPostS :: ScottyM()
+createPostS = get "/create/post/:userId/:post" $ do
+  post <- param "post"
+  userId <- param "userId"
+  liftIO $ createPost post userId
+  html $ mconcat ["<p>/create/post/" , userId , "/" , post , "</p>"]
 
 foor :: ScottyM()
 foor = get "/404"  foorView
 
 
 getUsersDB = do
-  -- conn <- connectSqlite3 databaseFilePath
-  -- usersF <- run conn "SELECT name FROM users VALUES" []
-  -- commit conn
-  -- disconnect conn
-  -- return(usersF)
+  -- TODO: write a function that takes in [(String, SqlValue)] -> HTML for specific row.
+  -- need to Lift and Map this function onto results of getUsersDB
   conn <- connectSqlite3 databaseFilePath
   stmt <- prepare conn "SELECT name FROM users VALUES"
   results <- fetchAllRowsAL stmt
