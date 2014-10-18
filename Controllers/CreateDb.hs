@@ -14,16 +14,13 @@ initDB = do
   conn <- connectSqlite3 databaseFilePath
   f <- getTables conn
   disconnect conn
-  if length f > 0
-    then
-      checkTables
-
-    else
-      createTables
-
-  -- commit conn
-  -- disconnect conn
+  selectOrBuild (length f)
   return ()
+
+
+selectOrBuild :: Int -> IO ()
+selectOrBuild 0 = createTables
+selectOrBuild n = checkTables
 
 
 createTables = do
