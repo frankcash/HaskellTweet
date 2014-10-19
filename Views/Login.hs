@@ -7,7 +7,7 @@ import Data.Monoid (mempty)
 import Data.Text.Lazy(toStrict)
 import Prelude hiding (div, head, id)
 import Text.Blaze.Html (Html, toHtml)
-import Text.Blaze.Html5 (Html, a, body, button, dataAttribute, div, docTypeHtml,form, h1, h2, head, input, li, link, meta, p, script, style, title, ul, (!))
+import Text.Blaze.Html5 (Html, a, body, button, dataAttribute, div, docTypeHtml,form, h1, h2, head, input, li, link, meta, p, form, script, style, title, ul, (!))
 import Text.Blaze.Html5.Attributes (charset, class_, content, href, httpEquiv, id, media, name, placeholder, rel, src, type_)
 import Views.Utils (blaze, pet)
 import Web.Scotty (ActionM)
@@ -36,7 +36,10 @@ loginView :: ActionM ()
 loginView = blaze $ layout "home" $ do
              div ! class_ "container" $ do
                div ! class_ "loginArea" $ do
-                 h1 "Please login"
+                 form ! class_ "form-signin" $ do
+                  h1 "Please login"
+                  input ! class_ "form-control username" ! placeholder "username"
+                  input ! class_ "form-control pass" ! placeholder "password"
 
 navBar :: Html
 navBar = div ! class_ "navbar navbar-default navbar-static-top" $ div ! class_ "container" $ do
