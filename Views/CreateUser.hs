@@ -29,19 +29,21 @@ layout t b = docTypeHtml $ do
              style $ pet $ toStrict layoutCss
            body $ do
              navBar >> b
-             script ! src "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" $ mempty
+             script ! src "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" $ mempty
              script ! src "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" $ mempty
 
 createUserView :: ActionM ()
 createUserView = blaze $ layout "home" $ do
+             script ! src "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" $ mempty
              div ! class_ "container" $ do
                div ! class_ "loginArea" $ do
                  form ! class_ "form-signin" $ do
                   h1 "Create New User:"
-                  input ! class_ "form-control username" ! placeholder "username"
-                  input ! class_ "form-control pass" ! placeholder "password"
-                  input ! class_ "form-control pass" ! placeholder "email address"
-                  input ! class_ "form-control pass" ! placeholder "blurb"
+                  input ! class_ "form-control username form-space" ! placeholder "username"
+                  input ! class_ "form-control pass form-space" ! placeholder "password"
+                  script "$('.pass').hover(function(){console.log('f');})"
+                  input ! class_ "form-control email form-space" ! placeholder "email address"
+                  input ! class_ "form-control blurb form-space" ! placeholder "blurb"
                   button ! type_ "submit"
                          ! class_ "btn btn-lg btn-primary btn-block"  $ "Submit"
 
