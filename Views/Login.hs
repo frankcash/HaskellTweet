@@ -40,6 +40,8 @@ loginView = blaze $ layout "home" $ do
                   h1 "Please login"
                   input ! class_ "form-control username" ! placeholder "username"
                   input ! class_ "form-control pass" ! placeholder "password"
+                  button ! type_ "submit"
+                         ! class_ "btn btn-lg btn-primary btn-block"  $ "λ"
 
 navBar :: Html
 navBar = div ! class_ "navbar navbar-default navbar-static-top" $ div ! class_ "container" $ do
@@ -48,6 +50,6 @@ navBar = div ! class_ "navbar navbar-default navbar-static-top" $ div ! class_ "
                     ! class_ "navbar-toggle" ! dataAttribute "toggle" "collapse" ! dataAttribute "target" ".navbar-collapse" $ do
                a ! class_ "navbar-brand" ! href "#" $ "λ"
            div ! class_ "navbar-collapse collapse" $ ul ! class_ "nav navbar-nav" $ do
-             li ! class_ "active" $ a ! href "/" $ "Home"
+             li $ a ! href "/" $ "Home"
              li $ a ! href "#about" $ "About"
-             li $ a ! href "/login" $ "Login"
+             li ! class_ "active" $ a ! href "/login" $ "Login"
