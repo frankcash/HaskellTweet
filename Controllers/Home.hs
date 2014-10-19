@@ -8,6 +8,7 @@ module Controllers.Home
   , createPostS
   , getAllUsers
   , foor
+  , newUser
   ) where
 
 import Control.Monad
@@ -15,6 +16,7 @@ import Web.Scotty (ScottyM, ActionM, get, html, param, text)
 import Data.Monoid (mconcat)
 import Views.Home (homeView)
 import Views.Login (loginView)
+import Views.CreateUser (createUserView)
 import Views.Foor (foorView)
 import Controllers.CreateDb (createUserDB, createPost)
 import Database.HDBC
@@ -38,6 +40,8 @@ foo = get "/foo" $ do
 -- createUser ::  Connection -> Redis a -> ActionM a -- correct, but not this use case
 -- createUser ::  ActionM a -> Connection -> IO() -- need to figure out
 
+newUser :: ScottyM()
+newUser = get "/newUser" createUserView
 
 getAllUsers :: ScottyM()
 getAllUsers = get "/users/all" $ do

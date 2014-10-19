@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Views.Login (loginView) where
+module Views.CreateUser (createUserView) where
 
 import Client.CSS (layoutCss)
 import Data.Monoid (mempty)
@@ -32,17 +32,18 @@ layout t b = docTypeHtml $ do
              script ! src "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" $ mempty
              script ! src "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" $ mempty
 
-loginView :: ActionM ()
-loginView = blaze $ layout "home" $ do
+createUserView :: ActionM ()
+createUserView = blaze $ layout "home" $ do
              div ! class_ "container" $ do
                div ! class_ "loginArea" $ do
                  form ! class_ "form-signin" $ do
-                  h1 "Please login"
+                  h1 "Create New User:"
                   input ! class_ "form-control username" ! placeholder "username"
                   input ! class_ "form-control pass" ! placeholder "password"
-                  p $ do a ! class_ "" ! href "/newUser" $ "first time loging in?"
+                  input ! class_ "form-control pass" ! placeholder "email address"
+                  input ! class_ "form-control pass" ! placeholder "blurb"
                   button ! type_ "submit"
-                         ! class_ "btn btn-lg btn-primary btn-block"  $ "λ"
+                         ! class_ "btn btn-lg btn-primary btn-block"  $ "Submit"
 
 navBar :: Html
 navBar = div ! class_ "navbar navbar-default navbar-static-top" $ div ! class_ "container" $ do
