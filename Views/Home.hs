@@ -49,4 +49,4 @@ navBar = div ! class_ "navbar navbar-default navbar-static-top" $ div ! class_ "
            div ! class_ "navbar-collapse collapse" $ ul ! class_ "nav navbar-nav" $ do
              li ! class_ "active" $ a ! href "#" $ "Home"
              li $ a ! href "#about" $ "About"
-             li $ a ! href "#contact" $ "Contact"
+             li $ a ! href "/login" $ "Login"

@@ -14,6 +14,7 @@ import Control.Monad
 import Web.Scotty (ScottyM, ActionM, get, html, param, text)
 import Data.Monoid (mconcat)
 import Views.Home (homeView)
+import Views.Login (loginView)
 import Views.Foor (foorView)
 import Controllers.CreateDb (createUserDB, createPost)
 import Database.HDBC
@@ -26,7 +27,7 @@ home :: ScottyM ()
 home = get "/" homeView
 
 login :: ScottyM()
-login = get "/login" $ html "login"
+login = get "/login" loginView
 
 foo :: ScottyM()
 foo = get "/foo" $ do
@@ -65,7 +66,7 @@ getUsersDB = do
   -- TODO: write a function that takes in [(String, SqlValue)] -> HTML for specific row.
   -- need to Lift and Map this function onto results of getUsersDB
   conn <- connectSqlite3 databaseFilePath
-  stmt <- prepare conn "SELECT name FROM users VALUES"
+  stmt <- prepare conn "SELECT * FROM users VALUES"
   results <- fetchAllRowsAL stmt
   disconnect conn
   return (results)
