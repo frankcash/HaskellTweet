@@ -10,6 +10,7 @@ import Database.HDBC
 import Database.HDBC.Sqlite3
 
 
+initDB :: IO ()
 initDB = do
   conn <- connectSqlite3 databaseFilePath
   f <- getTables conn
@@ -23,6 +24,7 @@ selectOrBuild 0 = createTables
 selectOrBuild n = checkTables
 
 
+createTables :: IO ()
 createTables = do
   conn <- connectSqlite3 databaseFilePath
   run conn ("CREATE TABLE users" ++
@@ -42,7 +44,6 @@ checkTables = do
   run conn ("SELECT * FROM users") []
   commit conn
   disconnect conn
-
 
 createUserDB name userId = do
   conn <- connectSqlite3 databaseFilePath
